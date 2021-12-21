@@ -46,7 +46,8 @@ async function Monitor(productLink) {
         if(availabilityDiv){
             let productImageURL = root.querySelector('#landingImage').getAttribute('src');
             let productName = productLink.substring(productLink.indexOf('com/') + 4, productLink.indexOf('/dp'));
-            let productMerchant = root.querySelector('#merchant');
+            //let productMerchant = root.querySelector('#merchant');
+            let productPrice = root.querySelector('#tp_price_block_total_price_ww').childNodes[0].innerText;
             let stockText = availabilityDiv.childNodes[1].innerText.toLowerCase();
             console.log(stockText);
             if(stockText == 'out of stock'){
@@ -55,14 +56,18 @@ async function Monitor(productLink) {
                 embed.setThumbnail(productImageURL);
                 embed.addField(productName, productLink, true);
                 embed.addField('Availability', 'In Stock', false);
+                embed.addField('Price', productPrice, false);
                 hook.send(embed);
                 console.log(productName + ' In Stock');
+                //console.log(productMerchant);
+                console.log(productPrice);
+                console.log(stockText);
             }
         }
 
     }
     //Loop so it keeps running and set time
-    await new Promise(r => setTimeout(r,3000));
+    await new Promise(r => setTimeout(r,5000));
     Monitor(productLink);
     return false;
     
