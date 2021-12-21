@@ -39,13 +39,14 @@ async function Monitor(productLink) {
     console.log(response.statusCode);
 
     if(response && response.statusCode == 200){
-        console.log(response.body);
+        //console.log(response.body);
         let root = HTMLParser.parse(response.body);
 
         let availabilityDiv = root.querySelector('#availability');
         if(availabilityDiv){
             let productImageURL = root.querySelector('#landingImage').getAttribute('src');
             let productName = productLink.substring(productLink.indexOf('com/') + 4, productLink.indexOf('/dp'));
+            let productMerchant = root.querySelector('#merchant');
             let stockText = availabilityDiv.childNodes[1].innerText.toLowerCase();
             console.log(stockText);
             if(stockText == 'out of stock'){
