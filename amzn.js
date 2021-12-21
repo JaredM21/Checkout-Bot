@@ -36,7 +36,7 @@ async function Monitor(productLink) {
         headers: myheaders
     });
     
-    console.log(response.statusCode);
+    //console.log(response.statusCode);
 
     if(response && response.statusCode == 200){
         //console.log(response.body);
@@ -48,11 +48,18 @@ async function Monitor(productLink) {
             let productName = productLink.substring(productLink.indexOf('com/') + 4, productLink.indexOf('/dp'));
             //let productMerchant = root.querySelector('#merchant');
             let productPrice = root.querySelector('#tp_price_block_total_price_ww').childNodes[0].innerText;
+            let productPriceNoDollar = productPrice.replace('$','');
+            let productPriceInteger = parseFloat(productPriceNoDollar.replace(",", ""));
+            let productPriceMSRP = 1500.00;
             let stockText = availabilityDiv.childNodes[1].innerText.toLowerCase();
             console.log(stockText);
             if(stockText == 'out of stock'){
                 console.log(productName + ' OSS');
-            } else {
+            } else if (productPriceInteger > productPriceMSRP) {
+                console.log('Price too high for ' + productName +  '!' + ' Price: ' + productPrice)
+                console.log('Looking For: ' + productPriceMSRP)
+           } 
+            else {
                 embed.setThumbnail(productImageURL);
                 embed.addField(productName, productLink, true);
                 embed.addField('Availability', 'In Stock', false);
@@ -61,6 +68,8 @@ async function Monitor(productLink) {
                 console.log(productName + ' In Stock');
                 //console.log(productMerchant);
                 console.log(productPrice);
+                console.log(productPriceNoDollar);
+                console.log(productPriceInteger);
                 console.log(stockText);
             }
         }
