@@ -1,0 +1,25 @@
+{
+  "name": "checkout-bot",
+  "version": "1.0.0",
+  "main": "amzn.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JaredM21/Checkout-Bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JaredM21/Checkout-Bot/issues"
+  },
+  "homepage": "https://github.com/JaredM21/Checkout-Bot#readme",
+  "description": "",
+  "dependencies": {
+    "discord-webhook-node": "^1.1.8",
+    "got": "^11.8.3",
+    "node-html-parser": "^5.1.0",
+    "prompt-sync": "^4.1.6"
+  }
+}
